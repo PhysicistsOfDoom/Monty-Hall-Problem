@@ -1,4 +1,5 @@
 import pygame
+from make_door import Door
 
 #initialize
 pygame.init()
@@ -16,16 +17,17 @@ screen_x, screen_y = screen.get_size()
 pygame.display.set_caption("Monty Hall Probability")
 
 #Variables
-block = pygame.Surface((200, 200))
-block.fill(WHITE)
-block_rect = pygame.Rect(250, 250, 200, 200)
+door1 = Door(400,400, "./media/DOOR OPEN.png", "./media/DOOR.png") #Object
 
-#Running
+#Game States
 running = True
-
+door_open = False
 
 #Game Loop
 while running:
+
+    #Update Screen
+    screen.fill(BLACK)
 
     #Input Handling
     for event in pygame.event.get():
@@ -37,16 +39,19 @@ while running:
         
         #Mouse check
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if block_rect.collidepoint(event.pos):
-                print("You clicked on the block!")
+            #Check events
+            if door1.rec.collidepoint(event.pos):
+                door1.toggle(door_open)
+                door_open = not door_open
+                    
 
     # ---- GAME MECHANICS BELOW ----
 
             
 
 
-    screen.blit(block, (250, 250))
-
+    
+    screen.blit(door1.image, door1.rec)
 
 
 
