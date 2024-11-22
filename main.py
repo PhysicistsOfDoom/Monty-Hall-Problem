@@ -1,5 +1,5 @@
 import pygame
-from make_door import Door
+from classes import Door
 
 #initialize
 pygame.init()
